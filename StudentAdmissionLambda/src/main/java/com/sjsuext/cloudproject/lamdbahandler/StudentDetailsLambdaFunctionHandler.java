@@ -98,16 +98,17 @@ public class StudentDetailsLambdaFunctionHandler implements RequestHandler<Stude
 			prepareStatement.setString(6, student.getGender());
 			prepareStatement.setString(7, student.getAbout());
 			prepareStatement.setString(8, student.getPrograms());
-			prepareStatement.setString(9, properties.getProperty("CLOUDFRONT_DOMAIN") + "/" +student.getName());
-			
+			prepareStatement.setString(9, properties.getProperty("CLOUDFRONT_DOMAIN") + "/" + student.getUsername()
+					+ "/" + student.getName());
+
 			prepareStatement.setString(10, Utilities.convertDateToString(new Date(System.currentTimeMillis())));
 			prepareStatement.setString(11, student.getFileDesc());
 			prepareStatement.setString(12, "");
-						
+
 			int executeUpdate = prepareStatement.executeUpdate();
-			System.out.println("executeUpdate "+executeUpdate);
-			if(executeUpdate > 0)
-				result = true;		
+			System.out.println("executeUpdate " + executeUpdate);
+			if (executeUpdate > 0)
+				result = true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}		
